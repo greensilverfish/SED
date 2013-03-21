@@ -37,15 +37,15 @@
 #    ___________
 #
 #       Input stellar effective temperature, distance [only for Log(L#)], 
-#       U,B,V,Rc,Ic,J,H,K,L,M,N,12,Q,20,60, and 100  IN MAGNITUDES!  In order
+#       U,B,V,Rc,Ic,J,H,K,IRAC-3.6,IRAC-4.5,IRAC-5.8,IRAC-8,MIPS-24,MIPS-70,60, and 100  IN MAGNITUDES!  In order
 #       to convert Janskies to magnitudes, need flux for zero-mag star: 
 #       
 #       Band        U     B      V          Rc        Ic        J  
 #       Fnu(Jy)     1810  4260   3640       3080      2550      1603  
-#       Band        H     K      L          M         N         Q
-#       Fnu(Jy)     1075  667    288        170       36.0      9.4 
-#       Band        IRAS12     IRAS25    IRAS60    IRAS100 
-#       Fnu(Jy)     28.3       6.73      1.19      0.43  
+#       Band        H     K    IRAC-3.6    IRAC-4.5  IRAC-5.8   IRAC-8
+#       Fnu(Jy)     1075  667   280.9        179.7     115      64.13 
+#       Band        MIPS-24    MIPS-70    IRAS60    IRAS100 
+#       Fnu(Jy)     7.17       0.778      1.19      0.43  
 #
 #    Returns:
 #    ________
@@ -64,12 +64,6 @@
 #
 ###############################################################################/
 import math
-
-#   double ub, bv, bcv, vico, rico, jho, jhco, hko, hkco, klo, vko, v12 
-#    double obs[16], repro[16], stellar[16], extinc[16], flux[16], obsSED[16], derobsSED[16], reproSED[16], starSED[16], lambda[16]
-#   double ric, av, bcic, mboli, llumi, Mi, mio
-#   int i
-#  char name[7], type[5], scrchar[20]
 
 # Set constants   #/
 
@@ -95,12 +89,12 @@ for line in file:
     name=row[0]
     lteff= float(row[1])
     dm= float(row[2])
-    obs=[float(row[3]), float(row[4]), float(row[5]), float(row[6]), float(row[7]), float(row[8]), float(row[9]), float(row[10]), float(row[11]), float(row[12]), float(row[13]), float(row[14]), float(row[15]), float(row[16]), float(row[17]), float(row[18])]
-
-    teff = math.pow(10.0,lteff) 
+    av= float(row[3])
+    obs=[float(row[4]), float(row[5]), float(row[6]), float(row[7]), float(row[8]), float(row[9]), float(row[10]), float(row[11]), float(row[12]), float(row[13]), float(row[14]), float(row[15]), float(row[16]), float(row[17]), float(row[18]), float(row[19])]
+    teff = math.pow(10.0,lteff)
     x = teff
 # Bstars giving divsion by zero error so we are skiping them when we read in.  
-    if name == "XMM1829561+0100217" or name == "HD_170634": 
+    if name == "XMM1829561_0100217" or name == "HD_170634": 
         continue
     
     if (teff > 1.0):
@@ -108,37 +102,29 @@ for line in file:
     #  Use the derived fits (references in header).
     
         ub = 2.674702e1 - x*3.675133e-2 + x*x*1.996307e-5 - x*x*x*5.315118e-9 + x*x*x*x*7.388618e-13 - x*x*x*x*x*5.155066e-17 + x*x*x*x*x*x*1.426480e-21
-    
         bv = 9.026432e1 - 1.116759e-1*x + x*x*5.917468e-5 -  x*x*x*1.703182e-8 + x*x*x*x*2.867242e-12 - x*x*x*x*x*2.826478e-16 + x*x*x*x*x*x*1.513376e-20 - x*x*x*x*x*x*x*3.400976e-25
-    
         bcv = -101.3651 + x*8.971698e-2 + x*x*-3.290524e-5 + x*x*x*6.334656e-9 + x*x*x*x*-6.714475e-13 + x*x*x*x*x*3.705377e-17 + x*x*x*x*x*x*-8.309852e-22
-    
         rico = 2.195985e1 - 1.499330e-2*x + x*x*4.177120e-6 -  x*x*x*5.805917e-10 + x*x*x*x*3.992331e-14 - x*x*x*x*x*1.084173e-18
-    
         vico = 1.103107e2 - 1.147069e-1*x + x*x*5.191987e-5 -  x*x*x*1.296276e-8 + x*x*x*x*1.911211e-12 - x*x*x*x*x*1.657877e-16 + x*x*x*x*x*x*7.820634e-21 - x*x*x*x*x*x*x*1.546372e-25
-    
         vko = 231.6392 - 0.2627116*x + x*x*1.32161e-4 - x*x*x*3.773421e-8 + x*x*x*x*6.658074e-12 - x*x*x*x*x*7.432943e-16 + x*x*x*x*x*x*5.129903e-20 - x*x*x*x*x*x*x*2.001820e-24 + x*x*x*x*x*x*x*x*3.381241e-29
-    
         jho = 2.857311e2 + x*-4.551107e-1 + x*x*3.134182e-4 + x*x*x*-1.224157e-7 + x*x*x*x*2.994256e-11 + x*x*x*x*x*-4.764616e-15 + x*x*x*x*x*x*4.938796e-19 + x*x*x*x*x*x*x*-3.218916e-23 + x*x*x*x*x*x*x*x*1.197969e-27 + x*x*x*x*x*x*x*x*x*-1.940957e-32
-    
         hko = 2.788605e0 + x*-1.731798e-3 + x*x*4.424067e-7 + x*x*x*-5.647841e-11 + x*x*x*x*3.559478e-15 + x*x*x*x*x*-8.828952e-20
-    
         klo = 4.964018e0 - x*3.818125e-3 + x*x*1.191141e-6 - x*x*x*1.846119e-10 + x*x*x*x*1.411467e-14 - x*x*x*x*x*4.248989e-19
-    
         v12 =  1.257185e1 - x*3.235974e-3 + x*x*2.866275e-7 - x*x*x*8.819869e-12
-    
     #  Perform color transformations
     
         jhco =  jho*0.911 
         hkco =  hko*0.971 - 0.02
+            
+    #  Calculate Colors V-R
     
-    #  Calculate Colors 
-    
-        ric = obs[3] - obs[4]
+    #    ric = obs[2] - obs[3]
+    #    print "ric=" ,ric
     
     #  Calculate Extinction
     
-        av = (ric - rico)/0.21
+    #    av = 5*(ric - (vico-rico))
+    #    print "av=" ,av
     
     #  Calculate absolute and dereddened Magnitudes for A0 and cooler used .76 for hotter than A0 used .82... mio is really mro, and Mi is really Mr
     
@@ -314,10 +300,10 @@ for line in file:
     #  Print out the header
      
     print(name)
-    print(lteff, llumi, av, rico, ric)
+    print(lteff, llumi, av, rico)
     outfile= open("/Users/Kryss/Desktop/SED/"+name+"out.txt", 'w+')
     outfile.write("**************************************" + name + "\n")
-    outfile.write(str(lteff) + "\t"+str(llumi)+"\t"+str(rico)+"\t"+str(ric) + "\n")
+    outfile.write(str(lteff) + "\t"+str(llumi)+"\t"+str(rico)+"\t" + "\n")
     outfile.write("***************************************************************    \n")
     outfile.write("Lambda           Fobs          deredF                    F*                   Frepro    \n")
     outfile.write("======           ======             ======                =====            =======    \n")
