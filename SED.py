@@ -69,11 +69,11 @@ import math
 
 # Units of Watts cm^-2 mu^-1 for a zero-magnitude star #/
 
-flux = [4.19e-12, 6.59e-12, 3.60e-12, 2.25e-12, 1.23e-12, 3.129e-13, 1.133e-13, 4.283e-14,6.50e-15, 2.66e-15, 1.02e-15, 3.04e-16, 3.73e-18, 4.76e-20, 9.92e-20, 1.29e-20]
+flux = [4.19e-12, 6.59e-12, 3.60e-12, 2.25e-12, 1.23e-12, 3.129e-13, 1.133e-13, 4.283e-14,6.50e-15, 2.66e-15, 1.02e-15, 3.04e-16, 3.73e-18, 9.92e-20, 4.76e-20, 1.29e-20]
 
 # Wavelength scale adopted U, B, V, Rc, Ic, J, H, K, L, M, N, IRAS12, Q, IRAS25, IRAS60, IRAS100
 
-lam = [0.36, 0.44, 0.55, 0.64, 0.79, 1.235, 1.662, 2.159, 3.55, 4.49, 5.73, 7.87, 24.0, 70.0, 60.0, 100.0]
+lam = [0.36, 0.44, 0.55, 0.64, 0.79, 1.235, 1.662, 2.159, 3.55, 4.49, 5.73, 7.87, 24.0, 60.0, 70.0, 100.0]
 
 #  Extinction law adopted as Alam/Av from Reike and Lebofsky UBV, Rc, Ic, JHKLMN12  #/ 
 
@@ -173,8 +173,8 @@ for line in file:
         repro.append(stellar[10] - 3.48) 
         repro.append(stellar[11] - 4.00) 
         repro.append(stellar[12] - 5.98) 
-        repro.append(stellar[13] - 8.01) 
-        repro.append(stellar[14] - 7.51) 
+        repro.append(stellar[13] - 7.51) 
+        repro.append(stellar[14] - 8.01) 
         repro.append(stellar[15] - 8.43)
     
     
@@ -193,8 +193,8 @@ for line in file:
         repro.append(stellar[10] - 2.93) 
         repro.append(stellar[11] - 3.45) 
         repro.append(stellar[12] - 5.43) 
-        repro.append(stellar[13] - 7.46) 
-        repro.append(stellar[14] - 6.91)
+        repro.append(stellar[13] - 6.91) 
+        repro.append(stellar[14] - 7.46)
         repro.append(stellar[15] - 7.83)
     
     if (6400.0 > teff and teff > 5800.0):
@@ -211,8 +211,8 @@ for line in file:
         repro.append(stellar[10] - 2.66) 
         repro.append(stellar[11] - 3.18) 
         repro.append(stellar[12] - 5.16) 
-        repro.append(stellar[13] - 7.19) 
-        repro.append(stellar[14] - 6.60) 
+        repro.append(stellar[13] - 6.60) 
+        repro.append(stellar[14] - 7.19) 
         repro.append(stellar[15] - 7.51)
     
     
@@ -231,8 +231,8 @@ for line in file:
         repro.append(stellar[10] - 2.47) 
         repro.append(stellar[11] - 2.99) 
         repro.append(stellar[12] - 4.97) 
-        repro.append(stellar[13] - 7.00) 
-        repro.append(stellar[14] - 6.38) 
+        repro.append(stellar[13] - 6.38) 
+        repro.append(stellar[14] - 7.00) 
         repro.append(stellar[15] - 7.30)
     
     
@@ -251,8 +251,8 @@ for line in file:
         repro.append(stellar[10] - 2.21) 
         repro.append(stellar[11] - 2.73) 
         repro.append(stellar[12] - 4.71) 
-        repro.append(stellar[13] - 6.74) 
-        repro.append(stellar[14] - 6.07) 
+        repro.append(stellar[13] - 6.07) 
+        repro.append(stellar[14] - 6.74) 
         repro.append(stellar[15] - 6.98)
     
     
@@ -271,8 +271,8 @@ for line in file:
         repro.append(stellar[10] - 2.05) 
         repro.append(stellar[11] - 2.57) 
         repro.append(stellar[12] - 4.55) 
-        repro.append(stellar[13] - 6.58) 
-        repro.append(stellar[14] - 5.87) 
+        repro.append(stellar[13] - 5.87) 
+        repro.append(stellar[14] - 6.58) 
         repro.append(stellar[15] - 6.78)
     
     if (3600.0 > teff and teff > 3000.0):
@@ -290,8 +290,8 @@ for line in file:
         repro.append(stellar[10] - 1.83) 
         repro.append(stellar[11] - 2.35) 
         repro.append(stellar[12] - 4.33) 
-        repro.append(stellar[13] - 6.36) 
-        repro.append(stellar[14] - 5.59) 
+        repro.append(stellar[13] - 5.59) 
+        repro.append(stellar[14] - 6.36) 
         repro.append(stellar[15] - 6.50)
     
     
